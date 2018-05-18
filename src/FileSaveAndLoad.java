@@ -65,18 +65,25 @@ public class FileSaveAndLoad implements ActionListener {
 				e1.printStackTrace();
 			}
 		} else {
-			String input = JOptionPane.showInputDialog("give me ur file naem plz");
-
 			jfc = new JFileChooser();
-			String fileName = jfc.getSelectedFile().getAbsolutePath();
-			try {
-				br = new BufferedReader(new FileReader(fileName));
-
-			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			int returnVal = jfc.showOpenDialog(null);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				String fileName = jfc.getSelectedFile().getAbsolutePath();
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(fileName));
+					for (int i = 0; i < jfc.getSelectedFile().length(); i++) {
+						if (br.readLine() != null) {
+							System.out.println(br.readLine());
+						}
+					}
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
-
 		}
 	}
 }
