@@ -66,16 +66,20 @@ public class FileSaveAndLoad implements ActionListener {
 			}
 		} else {
 			jfc = new JFileChooser();
+
 			int returnVal = jfc.showOpenDialog(null);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				String fileName = jfc.getSelectedFile().getAbsolutePath();
 				try {
 					BufferedReader br = new BufferedReader(new FileReader(fileName));
-					for (int i = 0; i < jfc.getSelectedFile().length(); i++) {
-						if (br.readLine() != null) {
-							System.out.println(br.readLine());
-						}
+					String s = "";
+					String l = br.readLine();
+					while (l != null) {
+						s += l;
+						s += "\n";
+						l = br.readLine();
 					}
+					j.setText(s);
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -83,6 +87,7 @@ public class FileSaveAndLoad implements ActionListener {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+
 			}
 		}
 	}
